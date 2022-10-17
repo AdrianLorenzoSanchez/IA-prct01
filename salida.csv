@@ -1,0 +1,5 @@
+Instancia;n;m;Vo;Vd;Coste;Camino;Generados;Inspeccionados
+grafo1.txt;15;19;1;15;36;15<-9<-6<-4<-2<-1;71;49
+grafo2.txt;20;25;1;20;13;20<-2<-1;8;4
+grafo2.txt;20;25;1;10;21;10<-5<-1;27;13
+grafo2.txt;20;25;3;9;19;9<-6<-3;49;27
