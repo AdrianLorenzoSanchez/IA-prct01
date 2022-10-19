@@ -4,19 +4,17 @@
 using namespace std;
 
 int main() {
-  
-  bool salir = false;
+
   string file;
   
+  bool salir = false;
   while (!salir) {
-    cout << "Especifica el fichero de entrada: "; cin >> file; 
+    cout << "Especifica el fichero de entrada (0 salir): "; cin >> file; 
     if (file == "0")
       salir = true;
     else {
-       
       Graph grafo(file);
       grafo.algoritmo();
-
     }
   }
 }

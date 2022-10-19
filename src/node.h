@@ -4,9 +4,9 @@
 
 class Node {
  private:
-  unsigned id_;
-  float cost_;
-  Node* padre_;
+  unsigned id_; // Identificador
+  float cost_;  // Coste del camino haste el nodo
+  Node* padre_; // Puntero al padre del nodo
 
  public: 
   Node(unsigned id, float cost, Node* padre); //Constructor parametrizado
@@ -15,4 +15,5 @@ class Node {
   float get_cost() const;
   Node* get_padre();
   void set_cost(float cost);
+
 };
