@@ -11,10 +11,12 @@ Graph::Graph(std::string file) {
   fin.open(file);
   fin >> nodos_;  
 
+  // Creamos la matriz de costes con tantas filas y columnas como el numero de nodos leído en el fichero
   costes_.resize(nodos_);
   for (int i = 0; i < costes_.size(); i++) 
     costes_[i].resize(nodos_);
 
+  // Asignamos los costes de cada posible arista
   float coste;
   for (int i = 0; i < nodos_-1; i++) {
     for (int j = i+1; j < nodos_; j++) {
@@ -127,7 +129,8 @@ bool Graph::visitados(Node* nodo, int i) {
 void Graph::print_result(Node* nodo, int origen) {
 
   ofstream fout("../salida.csv", ios::app);
-  fout << file_ << ";" << nodos_ << ";" << aristas_ << ";" << origen << ";" << nodo->get_id()+1 << ";" <<  nodo->get_cost() << ";";
+  float coste_camino = nodo->get_cost();
+  fout << file_ << ";" << nodos_ << ";" << aristas_ << ";" << origen << ";" << nodo->get_id()+1 << ";";
 
   // Creo un vector para poder imprimir el camino de izquierda a derecha
   vector<Node*> imprimir;
@@ -137,8 +140,9 @@ void Graph::print_result(Node* nodo, int origen) {
   }
   imprimir.push_back(nodo);
 
+  // Imprimimos el vector empezando por el final para que salga en orden 
   for (int i = imprimir.size()-1; i > 0; i--)
     fout << imprimir[i]->get_id()+1 << "->";
 
-  fout << imprimir[0]->get_id()+1 << ";" << generados_ << ";" << inspeccionados_ << endl;
+  fout << imprimir[0]->get_id()+1 << ";" << coste_camino << ";" << generados_ << ";" << inspeccionados_ << endl;
 }
