@@ -1,3 +1,6 @@
+#include<stdlib.h>
+#include<time.h>
+
 #include "graph.h"
 using namespace std;
 
@@ -75,12 +78,32 @@ Node* Graph::costo_uniforme(unsigned ini, unsigned final) {
   
   Node* nodo = new Node();
 
-  // Mientras la cola esté vacía, se saca un nodo y se elimina de la cola 
-  // Se comprueba si es el final devuelce el nodo y si no se generan los sucesores 
+  // Modificación
+  vector<Node*> elegir;
+  elegir.resize(2);
+  int random;
+  srand(time(NULL));
+
   while(!frontera.empty()) {
-    nodo = frontera.top();
-    frontera.pop();
-    inspeccionados_++; // Incrementamos el contador de nodos inspeccionados
+    if(frontera.size() == 1) {
+    	nodo = frontera.top();
+	    frontera.pop();
+	    inspeccionados_++;
+    }
+    else {
+	    elegir[0] = frontera.top(); frontera.pop();
+	    elegir[1] = frontera.top(); frontera.pop();
+
+	    random = rand()%2;
+	    nodo = elegir[random];
+
+	    if (random == 0)
+	      frontera.push(elegir[1]);
+	    else
+	      frontera.push(elegir[0]);
+
+	    inspeccionados_++;
+    }		    
     
     if (nodo->get_id() == final) 
       return nodo;
